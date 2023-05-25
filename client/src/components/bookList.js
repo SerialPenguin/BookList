@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BookItem from "./bookItem";
+import SearchInput from "./searchInput";
 
-function BookList({ loggedIn }) {
+function BookList({ loggedIn, onPurchase }) {
   const [books, setBooks] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   useEffect(() => {
     fetchBooks();
@@ -24,37 +27,73 @@ function BookList({ loggedIn }) {
     }
   };
 
+  const handleSearch = (searchTerm) => {
+    const filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredBooks);
+    setShowSearchResults(true);
+  };
+
+  const handleBackToAllBooks = () => {
+    setSearchResults([]);
+    setShowSearchResults(false);
+  };
+
   const handleAddToCart = (book, quantity) => {
     console.log(`Added ${quantity} ${book.title}(s) to the cart`);
-  
-    const updatedBooks = books.map((item) => {
-      if (item.id === book.id) {
-        return {
-          ...item,
-          quantity: Math.max(item.quantity - quantity, 0),
-        };
-      }
-      return item;
-    });
-  
-    setBooks(updatedBooks);
+
+    const bookIndex = books.findIndex(
+      (item) => item.title === book.title && item.author === book.author
+    );
+
+    if (bookIndex !== -1) {
+      const updatedBooks = [...books];
+      const updatedBook = { ...updatedBooks[bookIndex] };
+      updatedBook.quantity = Math.max(updatedBook.quantity - quantity, 0);
+      updatedBooks[bookIndex] = updatedBook;
+
+      setBooks(updatedBooks);
+    }
   };
-  
 
   return (
     <div>
       <h2>Book List</h2>
-      {books.length > 0 ? (
-        books.map((book) => (
-          <BookItem
-            key={book.id}
-            book={book}
-            onAddToCart={handleAddToCart}
-            loggedIn={loggedIn}
-          />
-        ))
+      {showSearchResults ? (
+        <div>
+          <button onClick={handleBackToAllBooks}>Back to All Books</button>
+          {searchResults.length > 0 ? (
+            searchResults.map((book) => (
+              <BookItem
+                key={book.title + "book"}
+                book={book}
+                onAddToCart={handleAddToCart}
+                loggedIn={loggedIn}
+                onPurchase={onPurchase}
+              />
+            ))
+          ) : (
+            <p>No search results found.</p>
+          )}
+        </div>
       ) : (
-        <p>Loading books...</p>
+        <div>
+          <SearchInput onSearch={handleSearch} />
+          {books.length > 0 ? (
+            books.map((book) => (
+              <BookItem
+                key={book.title + "book"}
+                book={book}
+                onAddToCart={handleAddToCart}
+                loggedIn={loggedIn}
+                onPurchase={onPurchase}
+              />
+            ))
+          ) : (
+            <p>Loading books...</p>
+          )}
+        </div>
       )}
     </div>
   );

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import LoginForm from "./components/loginForm";
 import BookList from "./components/bookList";
 import GuestButton from "./components/guestButton";
+import RegisterForm from "./components/registerForm";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   const handleLogin = (username) => {
     setLoggedIn(true);
@@ -15,6 +17,15 @@ function App() {
   const handleLogout = () => {
     setLoggedIn(false);
     setUsername("");
+  };
+
+  const handleRegisterClick = () => {
+    setShowRegisterForm(true);
+  };
+
+  const handleRegister = (username) => {
+    setShowRegisterForm(false);
+    handleLogin(username);
   };
 
   return (
@@ -27,8 +38,15 @@ function App() {
         </div>
       ) : (
         <div>
-          <LoginForm onLogin={handleLogin} />
-          <GuestButton onGuestClick={() => handleLogin("Guest")} />
+          {showRegisterForm ? (
+            <RegisterForm onRegister={handleRegister} />
+          ) : (
+            <div>
+              <LoginForm onLogin={handleLogin} />
+              <GuestButton onGuestClick={() => handleLogin("Guest")} />
+              <button onClick={handleRegisterClick}>Register</button>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -36,6 +54,3 @@ function App() {
 }
 
 export default App;
-
-
-

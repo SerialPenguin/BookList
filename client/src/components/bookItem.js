@@ -19,7 +19,7 @@ function BookItem({ book, onAddToCart }) {
   const loggedIn = !!token; // Check if the token exists
 
   return (
-    <div>
+    <div key={book.title}>
       <h3>{book.title}</h3>
       <p>Author: {book.author}</p>
       <p>Quantity: {book.quantity}</p>

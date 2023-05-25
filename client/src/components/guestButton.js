@@ -11,7 +11,7 @@ function GuestButton({ onGuestClick }) {
 
   return (
     <div>
-      <button onClick={handleGuestButtonClick}>Guest</button>
+      <button data-testid="book-btn" onClick={handleGuestButtonClick}>Guest</button>
       {showBookList && <BookList />}
     </div>
   );
