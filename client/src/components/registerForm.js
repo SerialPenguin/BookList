@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 function RegisterForm({ onRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegisterFormSubmit = async (event) => {
     event.preventDefault();
@@ -30,8 +34,10 @@ function RegisterForm({ onRegister }) {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         sessionStorage.setItem("Token", data.accessToken);
         onRegister(username);
+        navigate("/")
       } else {
         setError("Registration failed");
       }

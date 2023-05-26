@@ -33,7 +33,7 @@ function BookItem({ book, onAddToCart }) {
             onChange={handleQuantityChange}
           />
           <button onClick={() => setQuantity(quantity + 1)}>+</button>
-          <button onClick={addToCart}>Add to Cart</button>
+          <button onClick={addToCart}>Order</button>
         </div>
       )}
     </div>

@@ -40,22 +40,69 @@ function BookList({ loggedIn, onPurchase }) {
     setShowSearchResults(false);
   };
 
+
+  // Skapa förfrågan till servern och uppdatera quanitity /library/users/books {"title", "quantity"}
   const handleAddToCart = (book, quantity) => {
     console.log(`Added ${quantity} ${book.title}(s) to the cart`);
-
+  
     const bookIndex = books.findIndex(
       (item) => item.title === book.title && item.author === book.author
     );
-
+  
     if (bookIndex !== -1) {
       const updatedBooks = [...books];
       const updatedBook = { ...updatedBooks[bookIndex] };
       updatedBook.quantity = Math.max(updatedBook.quantity - quantity, 0);
       updatedBooks[bookIndex] = updatedBook;
-
+  
       setBooks(updatedBooks);
+  
+      // Find the book in the JSON data
+      const bookData = books.find(
+        (data) => data.title === book.title && data.author === book.author
+      );
+  
+      if (bookData) {
+        // Send request to save the number of books ordered
+        fetch("http://localhost:3000/library/user/books", {
+          method: "POST",
+          headers: {
+            authorization: sessionStorage.getItem("Token"),
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: bookData.title, // Use book title as the bookId for this example
+            quantity: quantity,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to save the number of books ordered.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error saving the number of books ordered:", error);
+            // Handle error
+          });
+      }
     }
   };
+  // const handleAddToCart = (book, quantity) => {
+  //   console.log(`Added ${quantity} ${book.title}(s) to the cart`);
+
+  //   const bookIndex = books.findIndex(
+  //     (item) => item.title === book.title && item.author === book.author
+  //   );
+
+  //   if (bookIndex !== -1) {
+  //     const updatedBooks = [...books];
+  //     const updatedBook = { ...updatedBooks[bookIndex] };
+  //     updatedBook.quantity = Math.max(updatedBook.quantity - quantity, 0);
+  //     updatedBooks[bookIndex] = updatedBook;
+
+  //     setBooks(updatedBooks);
+  //   }
+  // };
 
   return (
     <div>
