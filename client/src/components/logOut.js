@@ -8,6 +8,7 @@ const navigate = useNavigate();
           setLoggedIn(false);
           setUsername("");
           sessionStorage.removeItem("Token"); // Remove token from session storage
+          localStorage.removeItem("username");
           navigate("/");
         };
 

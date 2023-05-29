@@ -4,7 +4,7 @@ import BookList from "./bookList";
 import LogOutBtn from "./LogOut";
 import { buildFetchOptions } from "../util";
 
-function AdminBooks({ username, setUsername, setLoggedIn }) {
+function AdminBooks({ setUsername, setLoggedIn }) {
   const navigate = useNavigate();
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newBookAuthor, setNewBookAuthor] = useState("");
@@ -37,7 +37,7 @@ function AdminBooks({ username, setUsername, setLoggedIn }) {
 
   return (
     <div>
-      <h2>Welcome Admin, {username}!</h2>
+      <h2>Welcome Admin, {localStorage.getItem("username")}!</h2>
       <div>
         <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
         <div>
@@ -62,7 +62,7 @@ function AdminBooks({ username, setUsername, setLoggedIn }) {
           <button onClick={handleAddNewBook}>Add New Book</button>
         </div>
         <button onClick={() => navigate("/books")}>Books</button>
-        <button onClick={() => navigate("/users")}>Users</button>
+        <button onClick={() => navigate("/admin/users")}>Users</button>
       </div>
       <BookList loggedIn={true} onPurchase={() => {}} />
     </div>

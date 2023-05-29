@@ -23,8 +23,11 @@ function BookItem({ book, onAddToCart }) {
   const token = sessionStorage.getItem("Token");
   const loggedIn = !!token; // Check if the token exists
 
-  const payLoad = JSON.parse(atob(token.split(".")[1]))
-  const isLoggedInAsAdmin = payLoad.role === "ADMIN";
+  let isLoggedInAsAdmin;
+  try {const payLoad = JSON.parse(atob(token.split(".")[1]))
+  isLoggedInAsAdmin = payLoad.role === "ADMIN";} 
+  catch {isLoggedInAsAdmin = false}
+  
 
   return (
     <div key={book.title}>

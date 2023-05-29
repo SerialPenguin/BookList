@@ -45,10 +45,12 @@
 
     import React, { useEffect, useState } from "react";
 import { buildFetchOptions } from "../util.js";
+import BackButton from "./BackBtnUser.js";
 
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  
 
   const fetchUsers = async () => {
     try {
@@ -111,6 +113,7 @@ export default function Users() {
   };
 
 
+
   return (
     <div>
       <h2>User List</h2>
@@ -122,7 +125,10 @@ export default function Users() {
             <button onClick={() => promoteUser(user.username)}>Promote</button>
             <button onClick={() => deleteUser(user.username)}>Delete</button>
           </li>
-        ))}
+          ))}
+        <div>
+        <BackButton />
+        </div>
       </ul>
     </div>
   );

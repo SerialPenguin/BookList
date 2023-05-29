@@ -24,3 +24,4 @@ function SearchInput({ onSearch }) {
 }
 
 export default SearchInput;
+

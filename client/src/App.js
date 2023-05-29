@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoginForm from "./components/LoginForm";
 import BookList from "./components/bookList";
 import GuestButton from "./components/GuestButton";
@@ -15,9 +15,17 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   const handleLogin = (username) => {
     setLoggedIn(true);
     setUsername(username);
+    localStorage.setItem("username", username);
   };
 
   const handleRegister = (username) => {
@@ -49,7 +57,7 @@ function App() {
           path="/books"
           element={
             <div>
-              <h2>Welcome, {username}!</h2>
+              <h2>Welcome, {localStorage.getItem("username")}!</h2>
               <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
               <BookList loggedIn={loggedIn} />
             </div>

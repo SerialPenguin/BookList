@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { buildFetchOptions } from "../util";
 
-export default function EditBook({ book, onUpdate }) {
+export default function EditBook({ book }) {
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newQuantity, setNewQuantity] = useState(0);
