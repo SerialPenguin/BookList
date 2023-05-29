@@ -1,65 +1,76 @@
 import React, { useState } from "react";
-import LoginForm from "./components/loginForm";
+import LoginForm from "./components/LoginForm";
 import BookList from "./components/bookList";
-import GuestButton from "./components/guestButton";
-import RegisterForm from "./components/registerForm";
+import GuestButton from "./components/GuestButton";
+import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LogOutBtn from "./components/logOut";
-import RegisterBtn from "./components/register";
-// import PrivateRoute from "./components/privateRoute";
+import LogOutBtn from "./components/LogOut";
+import RegisterBtn from "./components/Register";
+import AdminBooks from "./components/AdminView";
+import Users from "./components/Users";
+
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  // const [showRegisterForm, setShowRegisterForm] = useState(false);
-  
 
   const handleLogin = (username) => {
     setLoggedIn(true);
     setUsername(username);
   };
 
-  // const handleLogout = () => {
-  //   setLoggedIn(false);
-  //   setUsername("");
-  //   sessionStorage.removeItem("Token"); // Remove token from session storage
-  // };
-
-  // const handleRegisterClick = () => {
-  //   setShowRegisterForm(true);
-  // };
-
   const handleRegister = (username) => {
-    // setShowRegisterForm(false);
     handleLogin(username);
   };
 
   return (
-  <BrowserRouter>
-    <Routes>
-      <Route index element={
-                  <div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          index
+          element={
+            <div>
               <LoginForm onLogin={handleLogin} />
               <GuestButton onGuestClick={() => handleLogin("Guest")} />
               <RegisterBtn />
-              {/* <button onClick={handleRegisterClick}>Register</button> */}
             </div>
-      }/>
-      <Route path="/auth/register" element={
-        <div>
-          <RegisterForm onRegister={handleRegister} />
-        </div>
-      }>
+          }
+        />
+        <Route
+          path="/auth/register"
+          element={
+            <div>
+              <RegisterForm onRegister={handleRegister} />
+            </div>
+          }
+        />
+        <Route
+          path="/books"
+          element={
+            <div>
+              <h2>Welcome, {username}!</h2>
+              <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
+              <BookList loggedIn={loggedIn} />
+            </div>
+          }
+        />
+        <Route
+          path="/admin"
+          element={<AdminBooks username={username} setUsername={setUsername} setLoggedIn={setLoggedIn} />} // Pass the username as a prop
+        />
+        <Route path="/admin/users" element={<Users/>}/>
+        <Route path="/admin/books" element={<AdminBooks/>}/>
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
-      </Route>
-      <Route path="/books" element={ 
-        <div>
-          <h2>Welcome, {username}!</h2>
-          <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn}/>
-          <BookList loggedIn={loggedIn} />
-        </div>}/>
-    </Routes>
-  </BrowserRouter>)
+export default App;
+
+
+
+
 
   //     return (
   //   <div>
@@ -84,9 +95,9 @@ function App() {
   //     )}
   //   </div>
   // );
-}
+// }
 
-export default App;
+
 
 
 // import React, { useState } from "react";

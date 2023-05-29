@@ -6,6 +6,7 @@ function LoginForm({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState("");
 
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,11 +26,17 @@ function LoginForm({ onLogin }) {
       });
 
       if (response.ok) {
-        const data = await response.json()
-        sessionStorage.setItem("Token", data.accessToken)
-        onLogin(username);
+        const data = await response.json();
         sessionStorage.setItem("Token", data.accessToken);
-        navigate("/books");
+        onLogin(username);
+        const jwtArray = data.accessToken.split(".");
+        const jwtPayload = JSON.parse(atob(jwtArray[1]));
+        setUserRole(jwtPayload.role);
+        if (jwtPayload.role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/books");
+        }
       } else {
         setError("Invalid username or password");
       }

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 
-function  LogOutBtn({setLoggedIn, setUsername}){
+function  LogOutBtn({ setLoggedIn, setUsername }){
 const navigate = useNavigate();
 
       const handleLogout = () => {
@@ -16,3 +16,4 @@ const navigate = useNavigate();
 
 
   export default LogOutBtn;
+

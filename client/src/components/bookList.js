@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
-import BookItem from "./bookItem";
-import SearchInput from "./searchInput";
+import BookItem from "./BookItem";
+import SearchInput from "./SearchInput";
+
 
 function BookList({ loggedIn, onPurchase }) {
   const [books, setBooks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
+  // useEffect(() => {
+  //   fetchBooks();
+  // }, []);
+
   useEffect(() => {
     fetchBooks();
+    const pollingInterval = setInterval(fetchBooks, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(pollingInterval);
   }, []);
 
   const fetchBooks = async () => {
@@ -27,6 +35,8 @@ function BookList({ loggedIn, onPurchase }) {
     }
   };
 
+
+
   const handleSearch = (searchTerm) => {
     const filteredBooks = books.filter((book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -43,7 +53,7 @@ function BookList({ loggedIn, onPurchase }) {
 
   // Skapa förfrågan till servern och uppdatera quanitity /library/users/books {"title", "quantity"}
   const handleAddToCart = (book, quantity) => {
-    console.log(`Added ${quantity} ${book.title}(s) to the cart`);
+    console.log(`Added ${quantity} ${book.title}(s) to order`);
   
     const bookIndex = books.findIndex(
       (item) => item.title === book.title && item.author === book.author
@@ -87,22 +97,6 @@ function BookList({ loggedIn, onPurchase }) {
       }
     }
   };
-  // const handleAddToCart = (book, quantity) => {
-  //   console.log(`Added ${quantity} ${book.title}(s) to the cart`);
-
-  //   const bookIndex = books.findIndex(
-  //     (item) => item.title === book.title && item.author === book.author
-  //   );
-
-  //   if (bookIndex !== -1) {
-  //     const updatedBooks = [...books];
-  //     const updatedBook = { ...updatedBooks[bookIndex] };
-  //     updatedBook.quantity = Math.max(updatedBook.quantity - quantity, 0);
-  //     updatedBooks[bookIndex] = updatedBook;
-
-  //     setBooks(updatedBooks);
-  //   }
-  // };
 
   return (
     <div>
