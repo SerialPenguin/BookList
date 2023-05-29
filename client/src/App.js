@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "./components/LoginForm";
-import BookList from "./components/bookList";
+import BookList from "./components/BookList";
 import GuestButton from "./components/GuestButton";
 import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LogOutBtn from "./components/LogOut";
+import LogOutBtn from "./components/LogOutBtn";
 import RegisterBtn from "./components/Register";
 import AdminBooks from "./components/AdminView";
 import Users from "./components/Users";
@@ -30,6 +30,13 @@ function App() {
 
   const handleRegister = (username) => {
     handleLogin(username);
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUsername("");
+    sessionStorage.removeItem("Token"); // Remove token from session storage
+    localStorage.removeItem("username");
   };
 
   return (
@@ -58,7 +65,7 @@ function App() {
           element={
             <div>
               <h2>Welcome, {localStorage.getItem("username")}!</h2>
-              <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
+              <LogOutBtn onLogout={handleLogout} />
               <BookList loggedIn={loggedIn} />
             </div>
           }

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import LogOutBtn from "./logOut";
+import LogOutBtn from "./LogOutBtn";
 
 describe("LogOutBtn", () => {
   it("removes JWT token and navigates to home page on logout button click", () => {

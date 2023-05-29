@@ -37,9 +37,9 @@ function BookList({ loggedIn, onPurchase }) {
 
 
 
-  const handleSearch = (searchTerm) => {
+  const handleSearch = (searchQuery) => {
     const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      book.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setSearchResults(filteredBooks);
     setShowSearchResults(true);

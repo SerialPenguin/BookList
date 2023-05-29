@@ -5,6 +5,7 @@ function  LogOutBtn({ setLoggedIn, setUsername }){
 const navigate = useNavigate();
 
       const handleLogout = () => {
+          
           setLoggedIn(false);
           setUsername("");
           sessionStorage.removeItem("Token"); // Remove token from session storage

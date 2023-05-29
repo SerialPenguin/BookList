@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BookList from "./bookList";
-import LogOutBtn from "./LogOut";
+import BookList from "./BookList";
+import LogOutBtn from "./LogOutBtn";
 import { buildFetchOptions } from "../util";
 
 function AdminBooks({ setUsername, setLoggedIn }) {
