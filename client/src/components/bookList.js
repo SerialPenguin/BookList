@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BookItem from "./BookItem";
 import SearchInput from "./SearchInput";
+import { searchValues } from "./SearchInput";
 
 
 function BookList({ loggedIn, onPurchase }) {
@@ -20,10 +21,12 @@ function BookList({ loggedIn, onPurchase }) {
   }, []);
 
   const fetchBooks = async () => {
+    if (searchValues.value.length > 0) 
+    return
     try {
       const response = await fetch("http://localhost:3000/library/books");
       const data = await response.json();
-      console.log("Received data:", data);
+      // console.log("Received data:", data);
 
       if (Array.isArray(data)) {
         setBooks(data);
@@ -37,13 +40,13 @@ function BookList({ loggedIn, onPurchase }) {
 
 
 
-  const handleSearch = (searchQuery) => {
-    const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setSearchResults(filteredBooks);
-    setShowSearchResults(true);
-  };
+  // const handleSearch = (searchQuery) => {
+  //   const filteredBooks = books.filter((book) =>
+  //     book.title.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  //   setSearchResults(filteredBooks);
+  //   setShowSearchResults(true);
+  // };
 
   const handleBackToAllBooks = () => {
     setSearchResults([]);
@@ -120,7 +123,7 @@ function BookList({ loggedIn, onPurchase }) {
         </div>
       ) : (
         <div>
-          <SearchInput onSearch={handleSearch} />
+          <SearchInput onSearch={setBooks} />
           {books.length > 0 ? (
             books.map((book) => (
               <BookItem

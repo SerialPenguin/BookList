@@ -65,7 +65,7 @@ function App() {
           element={
             <div>
               <h2>Welcome, {localStorage.getItem("username")}!</h2>
-              <LogOutBtn onLogout={handleLogout} />
+              <LogOutBtn onLogout={handleLogout} setLoggedIn={setLoggedIn} setUsername={setUsername} />
               <BookList loggedIn={loggedIn} />
             </div>
           }
@@ -75,7 +75,7 @@ function App() {
           element={<AdminBooks username={username} setUsername={setUsername} setLoggedIn={setLoggedIn} />} // Pass the username as a prop
         />
         <Route path="/admin/users" element={<Users/>}/>
-        <Route path="/admin/books" element={<AdminBooks/>}/>
+        <Route path="/admin/books" element={<AdminBooks username={username} setUsername={setUsername} setLoggedIn={setLoggedIn}/>}/>
       </Routes>
     </BrowserRouter>
   );

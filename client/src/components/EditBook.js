@@ -54,7 +54,7 @@ export default function EditBook({ book }) {
       <input
         type="number"
         value={newQuantity}
-        onChange={(e) => setNewQuantity(Number(e.target.value))}
+        onChange={(e) => setNewQuantity(e.target.value)}
         placeholder="New Quantity"
       />
       <button onClick={handleUpdate}>Update</button>
