@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { buildFetchOptions } from "../util";
+import "../stylesheet/pages/_AdminView.scss"
 
 export default function EditBook({ book }) {
   const [newTitle, setNewTitle] = useState("");
@@ -38,7 +39,7 @@ export default function EditBook({ book }) {
   };
  
   return (
-    <div>
+    <>
       <input
         type="text"
         value={newTitle}
@@ -57,7 +58,7 @@ export default function EditBook({ book }) {
         onChange={(e) => setNewQuantity(e.target.value)}
         placeholder="New Quantity"
       />
-      <button onClick={handleUpdate}>Update</button>
-    </div>
+      <button id="update-btn" onClick={handleUpdate}>Update</button>
+    </>
   );
 }

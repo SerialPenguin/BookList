@@ -1,0 +1,46 @@
+.user-list-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .user-list-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .user-list-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .user-list-container li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-list-container li span {
+    margin-right: 10px;
+  }
+  
+  .user-list-container li button {
+    margin-left: auto;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-list-container .delete-btn {
+    background-color: #dc3545;
+  }
+
+  .userBack-btn {
+    margin-left: auto;
+    padding: 6px 12px;
+    background-color: #1e4e48;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }

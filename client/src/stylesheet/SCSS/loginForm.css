@@ -1,0 +1,65 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f1f1f1;
+}
+
+.login-container h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.login-container p {
+  color: red;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.login-container label {
+  font-weight: bold;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.register-button {
+  padding: 10px 20px;
+  margin-left: 47.1%;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.guest-button {
+  margin-left: 47.5%;
+  padding: 10px 20px;
+  margin-top: -4px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  background-color: #f1f1f1;
+}/*# sourceMappingURL=loginForm.css.map */

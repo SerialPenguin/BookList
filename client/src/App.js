@@ -63,7 +63,7 @@ function App() {
         <Route
           path="/books"
           element={
-            <div>
+            <div className="admin-books-container">
               <h2>Welcome, {localStorage.getItem("username")}!</h2>
               <LogOutBtn onLogout={handleLogout} setLoggedIn={setLoggedIn} setUsername={setUsername} />
               <BookList loggedIn={loggedIn} />

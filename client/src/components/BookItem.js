@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DeleteBook from "./DeleteBooks";
 import EditBook from "./EditBook";
+import "../stylesheet/pages/_AdminView.scss"
 
 
 
@@ -36,19 +37,20 @@ function BookItem({ book, onAddToCart }) {
       <p>Quantity: {book.quantity}</p>
       {loggedIn && (
         <div>
-          <button onClick={() => setQuantity(quantity - 1)}>-</button>
+          
           <input
             type="number"
             min="0"
             value={quantity}
             onChange={handleQuantityChange}
           />
-          <button onClick={() => setQuantity(quantity + 1)}>+</button>
-          <button onClick={addToCart}>Order</button>
+          <button id="amount-btn" onClick={() => setQuantity(quantity - 1)}>-</button>
+          <button id="amount-btn" onClick={() => setQuantity(quantity + 1)}>+</button>
+          <button id="order-btn" onClick={addToCart}>Order</button>
           {isLoggedInAsAdmin && (
-        <div>
-          <DeleteBook book={book} />
+        <div className="admin-action">
           <EditBook book={book}  />
+          <DeleteBook book={book} />
         </div>
       )}
         </div>

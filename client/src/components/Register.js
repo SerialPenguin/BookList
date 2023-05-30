@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../stylesheet/pages/_loginForm.scss"
 
 
 function RegisterBtn (){
@@ -8,6 +9,6 @@ const handleRegister = (username) => {
     navigate("/auth/register")
 
   }
-  return <button onClick={handleRegister}>Register</button>
+  return <button className="register-button" onClick={handleRegister}>Register</button>
 };
   export default RegisterBtn;

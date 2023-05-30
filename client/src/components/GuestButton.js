@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BookList from "./BookList";
 import { useNavigate } from "react-router-dom";
+import "../stylesheet/pages/_loginForm.scss"
 
 function GuestButton({ onGuestClick }) {
   const [showBookList, setShowBookList] = useState(false);
@@ -14,7 +15,7 @@ function GuestButton({ onGuestClick }) {
 
   return (
     <div>
-      <button data-testid="book-btn" onClick={handleGuestButtonClick}>Guest</button>
+      <button data-testid="book-btn" className="guest-button" onClick={handleGuestButtonClick}>Guest</button>
       {showBookList && <BookList />}
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BookItem from "./BookItem";
 import SearchInput from "./SearchInput";
 import { searchValues } from "./SearchInput";
+import "../stylesheet/pages/_bookList.scss"
 
 
 function BookList({ loggedIn, onPurchase }) {
@@ -15,7 +16,7 @@ function BookList({ loggedIn, onPurchase }) {
 
   useEffect(() => {
     fetchBooks();
-    const pollingInterval = setInterval(fetchBooks, 5000); // Poll every 5 seconds
+    const pollingInterval = setInterval(fetchBooks, 2000); // Poll every 2 seconds
 
     return () => clearInterval(pollingInterval);
   }, []);
@@ -102,7 +103,7 @@ function BookList({ loggedIn, onPurchase }) {
   };
 
   return (
-    <div>
+    <div className="book-container">
       <h2>Book List</h2>
       {showSearchResults ? (
         <div>

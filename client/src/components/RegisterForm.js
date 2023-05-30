@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../stylesheet/pages/_loginForm.scss"
 
 
 
@@ -55,7 +56,7 @@ function RegisterForm({ onRegister }) {
 };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Register</h2>
       {error && <p>{error}</p>}
       <form onSubmit={handleRegisterFormSubmit}>

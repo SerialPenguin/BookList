@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ("../stylesheet/pages/_UsersView.scss")
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const BackButton = () => {
   };
 
   return (
-    <button onClick={handleBack}>Back</button>
+    <button className="userBack-btn" onClick={handleBack}>Back</button>
   );
 };
 

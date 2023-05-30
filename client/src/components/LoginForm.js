@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../stylesheet/pages/_loginForm.scss"
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -47,9 +48,10 @@ function LoginForm({ onLogin }) {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       {error && <p>{error}</p>}
+      
       <form onSubmit={handleLoginFormSubmit}>
         <div>
           <label htmlFor="username">Username:</label>

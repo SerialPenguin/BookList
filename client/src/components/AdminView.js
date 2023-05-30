@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BookList from "./BookList";
 import LogOutBtn from "./LogOutBtn";
 import { buildFetchOptions } from "../util";
+import "../stylesheet/pages/_AdminView.scss";
 
 function AdminBooks({ setUsername, setLoggedIn }) {
   const navigate = useNavigate();
@@ -36,11 +37,11 @@ function AdminBooks({ setUsername, setLoggedIn }) {
   };
 
   return (
-    <div>
+    <div className="admin-books-container">
       <h2>Welcome Admin, {localStorage.getItem("username")}!</h2>
       <div>
         <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
-        <div>
+        <div className="input-container">
           <input
             type="text"
             value={newBookTitle}

@@ -46,6 +46,7 @@
     import React, { useEffect, useState } from "react";
 import { buildFetchOptions } from "../util.js";
 import BackButton from "./BackBtnUser.js";
+import ("../stylesheet/pages/_UsersView.scss")
 
 
 export default function Users() {
@@ -115,7 +116,7 @@ export default function Users() {
 
 
   return (
-    <div>
+    <div className="user-list-container">
       <h2>User List</h2>
       <ul>
         {users.map((user, index) => (
@@ -123,7 +124,7 @@ export default function Users() {
             {user.username} ({user.role}) - Purchases:{" "}
             {user.purchases ? user.purchases.length : "0"}
             <button onClick={() => promoteUser(user.username)}>Promote</button>
-            <button onClick={() => deleteUser(user.username)}>Delete</button>
+            <button className="delete-btn" onClick={() => deleteUser(user.username)}>Delete</button>
           </li>
           ))}
         <div>

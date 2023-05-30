@@ -20,5 +20,5 @@ export default function DeleteBook({ book }) {
     }
   };
  
-  return <button onClick={handleDelete}>Delete</button>;
+  return <button id="delete-btn" onClick={handleDelete}>Delete</button>;
 }
