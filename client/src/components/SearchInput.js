@@ -51,6 +51,7 @@ function SearchInput({ onSearch }) {
   return (
     <div>
       <input
+        className="search-input-field"
         type="text"
         value={searchTerm}
         onChange={(e) => {setSearchTerm(e.target.value); searchValues.value = e.target.value}}

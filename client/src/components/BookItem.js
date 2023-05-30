@@ -31,9 +31,12 @@ function BookItem({ book, onAddToCart }) {
   
 
   return (
-    <div key={book.title}>
-      <h3>{book.title}</h3>
+    <div className="render-header" key={book.title}>
+      {/* <div className="book-headers">Book Title</div> */}
+      <h3>Title: {book.title}</h3>
+      {/* <div className="book-headers">Author</div> */}
       <p>Author: {book.author}</p>
+      {/* <div className="book-headers">Quantity</div> */}
       <p>Quantity: {book.quantity}</p>
       {loggedIn && (
         <div>

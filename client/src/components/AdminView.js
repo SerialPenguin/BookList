@@ -38,9 +38,11 @@ function AdminBooks({ setUsername, setLoggedIn }) {
 
   return (
     <div className="admin-books-container">
-      <h2>Welcome Admin, {localStorage.getItem("username")}!</h2>
-      <div>
+      <header>
+        <h2>Welcome Admin, {localStorage.getItem("username")}!</h2>
         <LogOutBtn setUsername={setUsername} setLoggedIn={setLoggedIn} />
+      </header>
+      <div>
         <div className="input-container">
           <input
             type="text"
@@ -62,8 +64,10 @@ function AdminBooks({ setUsername, setLoggedIn }) {
           />
           <button onClick={handleAddNewBook}>Add New Book</button>
         </div>
-        <button onClick={() => navigate("/books")}>Books</button>
-        <button onClick={() => navigate("/admin/users")}>Users</button>
+        <div className="input-container-btns">
+          <button onClick={() => navigate("/books")}>Books</button>
+          <button onClick={() => navigate("/admin/users")}>Users</button>
+        </div>
       </div>
       <BookList loggedIn={true} onPurchase={() => {}} />
     </div>
