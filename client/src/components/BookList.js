@@ -10,10 +10,6 @@ function BookList({ loggedIn, onPurchase }) {
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
-  // useEffect(() => {
-  //   fetchBooks();
-  // }, []);
-
   useEffect(() => {
     fetchBooks();
     const pollingInterval = setInterval(fetchBooks, 2000); // Poll every 2 seconds
@@ -40,14 +36,6 @@ function BookList({ loggedIn, onPurchase }) {
   };
 
 
-
-  // const handleSearch = (searchQuery) => {
-  //   const filteredBooks = books.filter((book) =>
-  //     book.title.toLowerCase().includes(searchQuery.toLowerCase())
-  //   );
-  //   setSearchResults(filteredBooks);
-  //   setShowSearchResults(true);
-  // };
 
   const handleBackToAllBooks = () => {
     setSearchResults([]);

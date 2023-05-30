@@ -31,5 +31,11 @@ describe("GuestButton", () => {
 
     // Check the arguments passed to navigateMock
     expect(navigateMock).toHaveBeenCalledWith("/books");
+
+    // Check that no token exists
+    const token = sessionStorage.getItem("Token");
+    expect(token).toBeNull();
   });
 });
+
+

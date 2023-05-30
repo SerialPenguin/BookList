@@ -1,13 +1,3 @@
-/*export const buildFetchOptions = (body, method) => ({
-    method: method,
-    body: JSON.stringify(body),
-    headers: {
-      "Content-Type": "application/json",
-      authorization: sessionStorage.getItem("Token")
-    }
-});
-*/
-
 export const buildFetchOptions = (body = {}, method = "GET") => {
     const options = {
       method: method,

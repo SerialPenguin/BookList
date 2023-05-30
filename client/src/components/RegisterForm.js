@@ -95,18 +95,3 @@ function RegisterForm({ onRegister }) {
 
 export default RegisterForm;
 
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log(data);
-  //       sessionStorage.setItem("Token", data.accessToken);
-  //       onRegister(username);
-  //       navigate("/")
-  //     } else {
-  //       setError("Registration failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error registering:", error);
-  //     setError("An error occurred while registering");
-  //   }
-  // };
