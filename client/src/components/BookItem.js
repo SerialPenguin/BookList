@@ -44,7 +44,7 @@ function BookItem({ book, onAddToCart }) {
             value={quantity}
             onChange={handleQuantityChange}
           />
-          <button id="amount-btn" onClick={() => setQuantity(quantity - 1)}>-</button>
+          <button id="amount-btn-minus" onClick={() => setQuantity(quantity - 1)}>-</button>
           <button id="amount-btn" onClick={() => setQuantity(quantity + 1)}>+</button>
           <button id="order-btn" onClick={addToCart}>Order</button>
           {isLoggedInAsAdmin && (
