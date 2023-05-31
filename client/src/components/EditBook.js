@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { buildFetchOptions } from "../util";
 import "../stylesheet/pages/_AdminView.scss"
 
+
+//logic to update a book, change title, author and quantity using states
 export default function EditBook({ book }) {
   const [newTitle, setNewTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
-  const [newQuantity, setNewQuantity] = useState(0);
+  const [newQuantity, setNewQuantity] = useState("");
 
   const handleUpdate = async () => {
     try {
@@ -21,7 +23,7 @@ export default function EditBook({ book }) {
           quantity: newQuantity,
         },
       };
-
+      //PUT req to the server with the updated book version
       const options = buildFetchOptions(updatedBook, "PUT");
       const response = await fetch("http://localhost:3000/admin/books", options);
       const data = await response.json();
@@ -31,10 +33,10 @@ export default function EditBook({ book }) {
         // Book details updated successfully
         console.log("Book details updated successfully");
       } else {
-        console.warn("Error updating book:", data);
+        console.log("Error updating book:", data);
       }
     } catch (error) {
-      console.error("Error updating book:", error);
+      console.log("Error updating book:", error);
     }
   };
  

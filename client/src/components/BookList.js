@@ -10,31 +10,36 @@ function BookList({ loggedIn, onPurchase }) {
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
+  //logic for short polling
   useEffect(() => {
+    sessionStorage.removeItem("version");
     fetchBooks();
     const pollingInterval = setInterval(fetchBooks, 2000); // Poll every 2 seconds
 
     return () => clearInterval(pollingInterval);
   }, []);
-
+  //fetching version number to see if it has changed
   const fetchBooks = async () => {
     if (searchValues.value.length > 0) 
     return
     try {
       const response = await fetch("http://localhost:3000/library/books");
       const data = await response.json();
+      if (sessionStorage.getItem("version") === data.version) {
+        return
+      }
+      sessionStorage.setItem("version" ,data.version)
       // console.log("Received data:", data);
 
-      if (Array.isArray(data)) {
-        setBooks(data);
+      if (Array.isArray(data.books)) {
+        setBooks(data.books);
       } else {
-        console.warn("Invalid data format:", data);
+        console.log("Invalid data format:", data);
       }
     } catch (error) {
-      console.error("Error fetching books:", error);
+      console.log("Error fetching books:", error);
     }
   };
-
 
 
   const handleBackToAllBooks = () => {
@@ -43,7 +48,7 @@ function BookList({ loggedIn, onPurchase }) {
   };
 
 
-  // Skapa förfrågan till servern och uppdatera quanitity /library/users/books {"title", "quantity"}
+  // Finds the index of the book and creates copies of the book array then prepares and updates the books quantity to the server
   const handleAddToCart = (book, quantity) => {
     console.log(`Added ${quantity} ${book.title}(s) to order`);
   
@@ -65,7 +70,7 @@ function BookList({ loggedIn, onPurchase }) {
       );
   
       if (bookData) {
-        // Send request to save the number of books ordered
+        // Sends a request to save the number of books ordered
         fetch("http://localhost:3000/library/user/books", {
           method: "POST",
           headers: {
@@ -73,7 +78,7 @@ function BookList({ loggedIn, onPurchase }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            title: bookData.title, // Use book title as the bookId for this example
+            title: bookData.title, 
             quantity: quantity,
           }),
         })
@@ -83,8 +88,7 @@ function BookList({ loggedIn, onPurchase }) {
             }
           })
           .catch((error) => {
-            console.error("Error saving the number of books ordered:", error);
-            // Handle error
+            console.log("Error saving the number of books ordered:", error);
           });
       }
     }

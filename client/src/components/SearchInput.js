@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+//searchValues gets a value from searchTerm and export that value to Booklist
 export const searchValues = { value: ""}
 
 function SearchInput({ onSearch }) {
@@ -7,8 +7,9 @@ function SearchInput({ onSearch }) {
 
   const handleSearch = async () => {
     if (searchTerm === "")
-    return
+    {sessionStorage.removeItem("version"); return}
     try {
+      //GET req to /books/search/:query to filter through all the books in server.
       const response = await fetch(`http://localhost:3000/library/books/search/${searchTerm}`);
       const data = await response.json();
       const filteredBooks = data.filter((book) =>
@@ -16,7 +17,7 @@ function SearchInput({ onSearch }) {
       );
       onSearch(filteredBooks);
     } catch (error) {
-      console.error("Error searching books:", error);
+      console.log("Error searching books:", error);
     }
   };
 

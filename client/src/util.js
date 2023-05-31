@@ -1,3 +1,5 @@
+
+//helper function that authorizes the user by getting Token from sessionStorage.
 export const buildFetchOptions = (body = {}, method = "GET") => {
     const options = {
       method: method,
@@ -7,18 +9,10 @@ export const buildFetchOptions = (body = {}, method = "GET") => {
       }
     };
   
-    // Lägg till body i options om det finns
+    // Add to body if that option is avalible.
     if (body && Object.keys(body).length > 0) {
       options.body = JSON.stringify(body);
     }
   
     return options;
   };
-
-
-  
-  
-  
-  
-  
-  

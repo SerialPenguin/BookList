@@ -67,9 +67,3 @@ describe("RegisterForm", () => {
     mockFetch.mockRestore();
   });
 });
-
-
-
-
-
-

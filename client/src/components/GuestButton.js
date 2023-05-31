@@ -3,6 +3,8 @@ import BookList from "./BookList";
 import { useNavigate } from "react-router-dom";
 import "../stylesheet/pages/_loginForm.scss"
 
+//function that renders the list of book to user without to be logged in.
+//recives the prop onGuestClick from App.js
 function GuestButton({ onGuestClick }) {
   const [showBookList, setShowBookList] = useState(false);
   const navigate = useNavigate();

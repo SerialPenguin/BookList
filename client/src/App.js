@@ -5,16 +5,17 @@ import GuestButton from "./components/GuestButton";
 import RegisterForm from "./components/RegisterForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LogOutBtn from "./components/LogOutBtn";
-import RegisterBtn from "./components/Register";
-import AdminBooks from "./components/AdminView";
+import RegisterBtn from "./components/RegisterBtn";
+import AdminBooks from "./components/AdminBooks";
 import Users from "./components/Users";
 
 
-
+// Handles the logic for handleLogin, handleLogout and handleRegister
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
+  // Stores the username in localstorage
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
@@ -35,8 +36,6 @@ function App() {
   const handleLogout = () => {
     setLoggedIn(false);
     setUsername("");
-    sessionStorage.removeItem("Token"); // Remove token from session storage
-    localStorage.removeItem("username");
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter as Router, useNavigate } from "react-router-dom";
-import GuestButton from "./guestButton";
+import GuestButton from "./GuestButton";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),

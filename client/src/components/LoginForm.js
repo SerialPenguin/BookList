@@ -7,8 +7,8 @@ function LoginForm({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useState("");
 
+//handles username and password received from the form.
   const handleLoginFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -25,14 +25,13 @@ function LoginForm({ onLogin }) {
         },
         body: JSON.stringify({ username, password }),
       });
-
+      //checks the role of the person that logs in and navigates to /admin or /books
       if (response.ok) {
         const data = await response.json();
         sessionStorage.setItem("Token", data.accessToken);
         onLogin(username);
         const jwtArray = data.accessToken.split(".");
         const jwtPayload = JSON.parse(atob(jwtArray[1]));
-        setUserRole(jwtPayload.role);
         if (jwtPayload.role === "ADMIN") {
           navigate("/admin");
         } else {
@@ -42,7 +41,7 @@ function LoginForm({ onLogin }) {
         setError("Invalid username or password");
       }
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.log("Error logging in:", error);
       setError("An error occurred while logging in");
     }
   };
@@ -78,5 +77,3 @@ function LoginForm({ onLogin }) {
 }
 
 export default LoginForm;
-
-

@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../stylesheet/pages/_loginForm.scss"
 
 
-
+//handles logic to registrate a new user with username and password
+//prop from App.js
+//error handles in state
 function RegisterForm({ onRegister }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,7 @@ function RegisterForm({ onRegister }) {
       setError("Passwords do not match");
       return;
     }
-
+    //post req to the server
     try {
       const response = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
@@ -33,7 +35,7 @@ function RegisterForm({ onRegister }) {
         body: JSON.stringify({ username, password }),
       });
 
-
+//saves Token if response is ok.
   if (response.ok) {
     const data = await response.json();
     sessionStorage.setItem("Token", data.accessToken);
@@ -50,7 +52,7 @@ function RegisterForm({ onRegister }) {
     setError("Registration failed");
   }
 } catch (error) {
-  console.error("Error registering:", error);
+  console.log("Error registering:", error);
   setError("An error occurred while registering");
 }
 };
@@ -94,4 +96,3 @@ function RegisterForm({ onRegister }) {
 }
 
 export default RegisterForm;
-

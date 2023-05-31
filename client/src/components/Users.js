@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { buildFetchOptions } from "../util.js";
 import BackButton from "./BackBtnUser.js";
-import ("../stylesheet/pages/_UsersView.scss")
+import "../stylesheet/pages/_UsersView.scss"
+import "../stylesheet/components/_userBtn.scss"
 
 
 export default function Users() {
   const [users, setUsers] = useState([]);
   
-
+//fetching users from the server if you are an admin.
   const fetchUsers = async () => {
     try {
       const response = await fetch("http://localhost:3000/admin/users", buildFetchOptions());
@@ -17,10 +18,10 @@ export default function Users() {
       if (response.ok) {
         setUsers(data);
       } else {
-        console.warn("Invalid data format:", data);
+        console.log("Invalid data format:", data);
       }
     } catch (error) {
-      console.error("Error fetching Users:", error);
+      console.log("Error fetching Users:", error);
     }
   };
 
@@ -28,6 +29,7 @@ export default function Users() {
     fetchUsers();
   }, []);
 
+  //checks if the user is admin, if so, promotes another user to admin.
   const promoteUser = async (username) => {
     try {
       const payload = { username };
@@ -40,15 +42,13 @@ export default function Users() {
         // User promoted successfully, update the user list or take appropriate action
         fetchUsers();
       } else {
-        console.warn("Error promoting user:", data);
+        console.log("Error promoting user:", data);
       }
     } catch (error) {
-      console.error("Error promoting user:", error);
+      console.log("Error promoting user:", error);
     }
   };
-
-
-
+//gets the username from payload, checks if you are an admin, delete the user by username.
   const deleteUser = async (username) => {
     try {
       const payload = { username };
@@ -61,10 +61,10 @@ export default function Users() {
         // User deleted successfully, update the user list or take appropriate action
         fetchUsers();
       } else {
-        console.warn("Error deleting user:", data);
+        console.log("Error deleting user:", data);
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.log("Error deleting user:", error);
     }
   };
 
@@ -78,8 +78,8 @@ export default function Users() {
           <li key={index}>
             {user.username} ({user.role}) - Purchases:{" "}
             {user.purchases ? user.purchases.length : "0"}
-            <button onClick={() => promoteUser(user.username)}>Promote</button>
-            <button className="delete-btn" onClick={() => deleteUser(user.username)}>Delete</button>
+            <button id="promote-btn" onClick={() => promoteUser(user.username)}>Promote</button>
+            <button id="delete-btn" onClick={() => deleteUser(user.username)}>Delete</button>
           </li>
           ))}
         <div>

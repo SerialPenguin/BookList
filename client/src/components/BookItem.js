@@ -4,10 +4,10 @@ import EditBook from "./EditBook";
 import "../stylesheet/pages/_AdminView.scss"
 
 
-
+//recives props (books, onAddToCart) from BookList.
 
 function BookItem({ book, onAddToCart }) {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState("");
 
   const addToCart = () => {
     if (quantity > 0) {
@@ -15,7 +15,7 @@ function BookItem({ book, onAddToCart }) {
       setQuantity(0);
     }
   };
-
+  //handles quantity and saves it in state.
   const handleQuantityChange = (event) => {
     const value = parseInt(event.target.value);
     setQuantity(value >= 0 ? value : 0);
@@ -24,6 +24,7 @@ function BookItem({ book, onAddToCart }) {
   const token = sessionStorage.getItem("Token");
   const loggedIn = !!token; // Check if the token exists
 
+  // Splits the payload and checks if the token role is Admin
   let isLoggedInAsAdmin;
   try {const payLoad = JSON.parse(atob(token.split(".")[1]))
   isLoggedInAsAdmin = payLoad.role === "ADMIN";} 
@@ -60,5 +61,3 @@ function BookItem({ book, onAddToCart }) {
 }
 
 export default BookItem;
-
-

@@ -1,5 +1,7 @@
 import { buildFetchOptions } from "../util";
 
+
+//Sends a DELETE request to the server based on the books title while using a helper function to verify role
 export default function DeleteBook({ book }) {
   const handleDelete = async () => {
     try {
@@ -9,14 +11,14 @@ export default function DeleteBook({ book }) {
       console.log("Delete Book response:", data);
 
       if (response.ok) {
-        // Boken har tagits bort, utför lämpliga åtgärder
+        // The book has been removed, take necessary actions
         console.log("Book deleted successfully");
-        // Uppdatera boklistan om det behövs
+        // Update the booklist if needed
       } else {
-        console.warn("Error deleting book:", data);
+        console.log("Error deleting book:", data);
       }
     } catch (error) {
-      console.error("Error deleting book:", error);
+      console.log("Error deleting book:", error);
     }
   };
  

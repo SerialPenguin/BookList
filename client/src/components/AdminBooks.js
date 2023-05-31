@@ -5,6 +5,7 @@ import LogOutBtn from "./LogOutBtn";
 import { buildFetchOptions } from "../util";
 import "../stylesheet/pages/_AdminView.scss";
 
+//handles the functionality to add a new book to the existing API using a helper function to check your role
 function AdminBooks({ setUsername, setLoggedIn }) {
   const navigate = useNavigate();
   const [newBookTitle, setNewBookTitle] = useState("");
@@ -22,17 +23,17 @@ function AdminBooks({ setUsername, setLoggedIn }) {
       const response = await fetch("http://localhost:3000/admin/books", options);
 
       if (response.ok) {
-        // Book added successfully, perform any necessary actions
+        // Book added successfully to the fetched route
         console.log("New book added successfully");
-        // Reset the input fields
+        // Resets the input fields
         setNewBookTitle("");
         setNewBookAuthor("");
         setNewBookQuantity("");
       } else {
-        console.warn("Error adding new book");
+        console.log("Error adding new book");
       }
     } catch (error) {
-      console.error("Error adding new book:", error);
+      console.log("Error adding new book:", error);
     }
   };
 
@@ -65,7 +66,7 @@ function AdminBooks({ setUsername, setLoggedIn }) {
           <button onClick={handleAddNewBook}>Add New Book</button>
         </div>
         <div className="input-container-btns">
-          <button onClick={() => navigate("/books")}>Books</button>
+          <button onClick={() => {sessionStorage.removeItem("version"); navigate("/books")}}>Books</button>
           <button onClick={() => navigate("/admin/users")}>Users</button>
         </div>
       </div>
@@ -75,7 +76,3 @@ function AdminBooks({ setUsername, setLoggedIn }) {
 }
 
 export default AdminBooks;
-
-
-
-
